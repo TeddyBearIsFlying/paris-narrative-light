@@ -2,21 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const LAYERS = [
-  { src: "/layer_skyline.webp",        p: 0.02, dx: 0     },
-  { src: "/layer_sky.webp",            p: 0.04, dx: 0.008 },
-  { src: "/layer_clouds.webp",         p: 0.06, dx: 0.015 },
-  { src: "/layer_far_city.webp",       p: 0.08, dx: 0     },
-  { src: "/layer_mid_city.webp",       p: 0.12, dx: 0     },
-  { src: "/layer_eiffel.webp",         p: 0.10, dx: 0     },
-  { src: "/layer_institut.webp",       p: 0.14, dx: 0     },
-  { src: "/layer_opera.webp",          p: 0.14, dx: 0     },
-  { src: "/layer_bridges.webp",        p: 0.16, dx: 0     },
-  { src: "/layer_pyramid_bridge.webp", p: 0.18, dx: 0     },
-  { src: "/layer_seine.webp",          p: 0.20, dx: 0     },
-  { src: "/layer_water.webp",          p: 0.20, dx: 0     },
-  { src: "/layer_boats.webp",          p: 0.22, dx: 0.004 },
-  { src: "/layer_pyramide.webp",       p: 0.24, dx: 0     },
-  { src: "/layer_foreground.webp",     p: 0.28, dx: 0     },
+  { src: "/layer_skyline.webp", p: 0.02, dx: 0 },
+  { src: "/layer_sky.webp", p: 0.04, dx: 0.008 },
+  { src: "/layer_clouds.webp", p: 0.06, dx: 0.015 },
+  { src: "/layer_far_city.webp", p: 0.08, dx: 0 },
+  { src: "/layer_mid_city.webp", p: 0.12, dx: 0 },
+  { src: "/layer_eiffel.webp", p: 0.1, dx: 0 },
+  { src: "/layer_institut.webp", p: 0.14, dx: 0 },
+  { src: "/layer_opera.webp", p: 0.14, dx: 0 },
+  { src: "/layer_bridges.webp", p: 0.16, dx: 0 },
+  { src: "/layer_pyramid_bridge.webp", p: 0.18, dx: 0 },
+  { src: "/layer_seine.webp", p: 0.2, dx: 0 },
+  { src: "/layer_water.webp", p: 0.2, dx: 0 },
+  { src: "/layer_boats.webp", p: 0.22, dx: 0.004 },
+  { src: "/layer_pyramide.webp", p: 0.24, dx: 0 },
+  { src: "/layer_foreground.webp", p: 0.28, dx: 0 },
 ];
 
 export default function Index() {
@@ -95,7 +95,17 @@ export default function Index() {
   if (!mountNode) return null;
 
   return createPortal(
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#060608" }}>
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+        background: "#060608",
+      }}
+    >
       {LAYERS.map((layer, i) => (
         <div
           key={layer.src}
@@ -138,6 +148,6 @@ export default function Index() {
         }}
       />
     </div>,
-    mountNode
+    mountNode,
   );
 }
