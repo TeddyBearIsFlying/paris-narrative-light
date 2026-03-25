@@ -106,7 +106,7 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
 
       // Animate dot migration over 1800ms
       const migStart = Date.now();
-      let raf: number;
+      let _raf: number;
       const animateDot = () => {
         const elapsed = Date.now() - migStart;
         const t = Math.min(elapsed / 1800, 1);
@@ -124,7 +124,7 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
         setDotGlow(`0 0 ${40 * eased}px ${10 * eased}px rgba(201,168,76,${0.3 * eased})`);
 
         if (t < 1) {
-          raf = requestAnimationFrame(animateDot);
+          _raf = requestAnimationFrame(animateDot);
         } else {
           // Fade out dot
           const fadeStart = Date.now();
@@ -270,7 +270,7 @@ const IntroSequence = ({ onComplete }: IntroSequenceProps) => {
                       style={{ color: '#C9A84C' }}
                       initial={{ opacity: 0 }}
                       animate={{
-                        opacity: mottoState === 'heritage-fading' || mottoState === 'dot-only' ? 0 : 1,
+                        opacity: mottoState === 'heritage-fading' ? 0 : 1,
                       }}
                       transition={{ duration: 0.5 }}
                     >
