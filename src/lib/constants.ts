@@ -1,5 +1,3 @@
-import * as THREE from 'three';
-
 export const COLORS = {
   black: '#0A0A0A',
   gold: '#C9A84C',
@@ -7,25 +5,13 @@ export const COLORS = {
   white: '#FFFFFF',
 };
 
-export const PAINTING_WIDTH = 42;
-export const PAINTING_HEIGHT = 18;
-
-export function paintingToWorld(xPct: number, yPct: number, zOffset = 0.1): [number, number, number] {
-  return [
-    (xPct - 0.5) * PAINTING_WIDTH,
-    (0.5 - yPct) * PAINTING_HEIGHT,
-    zOffset,
-  ];
-}
-
 export interface MonumentDef {
   id: string;
   label: string;
   buildingName: string;
+  /** Position as % of viewport */
   pos: { x: number; y: number };
-  hitboxSize: [number, number];
   approachDuration: number;
-  fovTarget: number;
   spaceTitle: string;
   spaceSurtitle: string;
   spaceSubtitle: string;
@@ -43,10 +29,8 @@ export const MONUMENTS: Record<string, MonumentDef> = {
     id: 'louvre',
     label: "L'Institution",
     buildingName: 'Pyramide du Louvre',
-    pos: { x: 0.48, y: 0.72 },
-    hitboxSize: [5, 4],
+    pos: { x: 57, y: 68 },
     approachDuration: 6,
-    fovTarget: 34,
     spaceTitle: "L'INSTITUTION",
     spaceSurtitle: 'I',
     spaceSubtitle: 'Le Prix',
@@ -59,10 +43,8 @@ export const MONUMENTS: Record<string, MonumentDef> = {
     id: 'institut',
     label: 'La Consécration',
     buildingName: 'Institut de France',
-    pos: { x: 0.28, y: 0.48 },
-    hitboxSize: [4, 3.5],
+    pos: { x: 19, y: 49 },
     approachDuration: 5,
-    fovTarget: 35,
     spaceTitle: 'LA CONSÉCRATION',
     spaceSurtitle: 'II',
     spaceSubtitle: 'Distinctions',
@@ -74,10 +56,8 @@ export const MONUMENTS: Record<string, MonumentDef> = {
     id: 'opera',
     label: 'La Traversée',
     buildingName: 'Opéra Garnier',
-    pos: { x: 0.78, y: 0.42 },
-    hitboxSize: [4, 3.5],
+    pos: { x: 44, y: 41 },
     approachDuration: 5.5,
-    fovTarget: 35,
     spaceTitle: 'LA TRAVERSÉE',
     spaceSurtitle: 'III',
     spaceSubtitle: 'Mémoire',
@@ -89,10 +69,8 @@ export const MONUMENTS: Record<string, MonumentDef> = {
     id: 'grandPalais',
     label: "L'Empreinte",
     buildingName: 'Grand Palais',
-    pos: { x: 0.55, y: 0.35 },
-    hitboxSize: [5, 3],
+    pos: { x: 83, y: 42 },
     approachDuration: 5,
-    fovTarget: 36,
     spaceTitle: "L'EMPREINTE",
     spaceSurtitle: 'IV',
     spaceSubtitle: 'Héritage',
@@ -104,36 +82,3 @@ export const MONUMENTS: Record<string, MonumentDef> = {
 };
 
 export const MONUMENT_ORDER = ['louvre', 'institut', 'opera', 'grandPalais'];
-
-export const SEINE_LIGHTS: Array<{ x: number; y: number }> = [
-  // Upper Seine near Institut
-  { x: 0.20, y: 0.44 },
-  { x: 0.26, y: 0.47 },
-  // Pont des Arts / Pont Neuf
-  { x: 0.32, y: 0.51 },
-  { x: 0.36, y: 0.54 },
-  // Central bridges
-  { x: 0.41, y: 0.57 },
-  { x: 0.46, y: 0.60 },
-  // Near Louvre (center spark)
-  { x: 0.50, y: 0.63 },
-  // Lower Seine
-  { x: 0.54, y: 0.61 },
-  { x: 0.59, y: 0.58 },
-  { x: 0.64, y: 0.55 },
-];
-
-export function createGlowTexture(): THREE.CanvasTexture {
-  const size = 64;
-  const canvas = document.createElement('canvas');
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext('2d')!;
-  const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-  gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.4)');
-  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, size, size);
-  return new THREE.CanvasTexture(canvas);
-}
