@@ -40,6 +40,7 @@ const MonumentSpace = ({ monument, visible, onClose, onNavigate }: MonumentSpace
       case 'institut': return <SalleInstitut monument={monument} />;
       case 'opera': return <SalleOpera monument={monument} />;
       case 'grandPalais': return <SalleGrandPalais monument={monument} />;
+      case 'eiffel': return <SalleEiffel monument={monument} />;
       default: return null;
     }
   };
