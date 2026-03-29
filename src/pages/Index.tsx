@@ -255,7 +255,7 @@ export default function Index() {
 
       {/* Metro capsule */}
       <MetroCapsule
-        visible={showPanorama || appPhase === 'salle'}
+        visible={appPhase === 'panorama' || appPhase === 'salle'}
         activeMonumentId={selectedMonument?.id ?? null}
         onStationClick={handleStationClick}
         panoramaMode={appPhase === 'panorama'}
