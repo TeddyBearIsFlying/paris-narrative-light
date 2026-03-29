@@ -6,6 +6,7 @@ import SalleLouvre from './salle/SalleLouvre';
 import SalleInstitut from './salle/SalleInstitut';
 import SalleOpera from './salle/SalleOpera';
 import SalleGrandPalais from './salle/SalleGrandPalais';
+import SalleEiffel from './salle/SalleEiffel';
 
 interface MonumentSpaceProps {
   monument: MonumentDef | null;
