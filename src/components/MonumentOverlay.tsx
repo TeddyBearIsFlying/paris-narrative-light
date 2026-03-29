@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MONUMENTS, MONUMENT_ORDER, type MonumentDef } from '@/lib/constants';
 
